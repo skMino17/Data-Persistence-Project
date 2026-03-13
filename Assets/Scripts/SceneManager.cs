@@ -4,22 +4,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static SceneManager SM { get; private set; }
+
+    private void Awake()
     {
-        
+        // start of new code
+        if (SM != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
+        SM = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void LoadScene(int sceneId)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneId);
-    }
+    public void LoadScene(int sceneId) => UnityEngine.SceneManagement.SceneManager.LoadScene(sceneId);
 
     public void ExitGame()
     {
