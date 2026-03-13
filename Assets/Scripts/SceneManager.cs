@@ -1,6 +1,5 @@
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
@@ -8,13 +7,11 @@ public class SceneManager : MonoBehaviour
 
     private void Awake()
     {
-        // start of new code
         if (SM != null)
         {
             Destroy(gameObject);
             return;
         }
-        // end of new code
 
         SM = this;
         DontDestroyOnLoad(gameObject);

@@ -1,45 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
+    public static MainManager Instance;
     public Brick BrickPrefab;
-    public int LineCount = 6;
     public Rigidbody Ball;
-
     public Text ScoreText;
     public Text HighScoreText;
     public GameObject GameOverText;
-
-    private bool m_Started = false;
+    public int LineCount = 6;
     private int m_Points;
-
+    private bool m_Started = false;
     private bool m_GameOver = false;
-
-    public static MainManager Instance;
 
     private void Awake()
     {
-        // start of new code
         if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        // end of new code
         Instance = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         ScoreText.text = $"{GameManager.GM.GetName()} Score : {m_Points}";
 
-        // CHANGE THIS LINE:
         HighScoreText.text = GameManager.GM.GetHighScoreString();
 
         const float step = 0.6f;
@@ -89,11 +77,7 @@ public class MainManager : MonoBehaviour
 
         if (m_Points > GameManager.GM.GetHighScore())
         {
-            // CHANGE THIS LINE: 
-            // Remove the string part, just keep 'm_Points'
             GameManager.GM.SetHighScore(m_Points);
-
-            // Update the text using the new helper function
             HighScoreText.text = GameManager.GM.GetHighScoreString();
         }
     }

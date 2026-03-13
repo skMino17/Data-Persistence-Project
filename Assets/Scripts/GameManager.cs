@@ -4,11 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager GM { get; private set; }
-
-    // Data for the CURRENT session
     private string playerName = "New Player";
-
-    // Data for the SAVED highscore
     private string highscoreHolder = "None";
     private int highscore = 0;
 
@@ -58,22 +54,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Set by the Input Field in the Menu
     public void SetName(string name) => playerName = name;
     public string GetName() => playerName;
 
-    // Called by MainManager when a record is broken
     public void SetHighScore(int score)
     {
         highscore = score;
-        highscoreHolder = playerName; // The current player now owns the highscore
-        SaveHighScore(); // Save immediately when a record is broken
+        highscoreHolder = playerName;
+        SaveHighScore();
     }
 
     public int GetHighScore() => highscore;
     public string GetHighscoreHolder() => highscoreHolder;
-
-    // Returns a formatted string like "Highscore: Peter : 58"
     public string GetHighScoreString()
     {
         return $"Highscore: {highscoreHolder} : {highscore}";
